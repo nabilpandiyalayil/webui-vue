@@ -430,12 +430,12 @@
   },
   "pageConcurrentMaintenance": {
     "concurrentMaintenance": "Concurrent maintenance",
-    "opPanelBase": "Operator panel base maintenance",
-    "opPanelLcd": "Operator panel LCD maintenance",
+    "controlPanel": "Control panel maintenance",
+    "controlPanelDisp": "Control panel display maintenance",
     "tod": "Time of day battery maintenance",
     "alert": {
-      "message": "To remove or replace the battery, operator panel base or operator panel LCD enable the respective toggle switch. Once it is done, it is recommended to disable to go back to normal mode.",
-      "title": "Concurrent repair of the battery, operator panel base and operator panel LCD"
+      "message": "To remove or replace the battery, control panel or control panel display enable the respective toggle switch. Once it is done, it is recommended to disable to go back to normal mode.",
+      "title": "Concurrent repair of the battery, control panel and control panel display"
     },
     "toast": {
       "errorSaveReadyToRemove": "Error %{state} ready to remove state.",
