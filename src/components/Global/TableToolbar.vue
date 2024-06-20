@@ -122,7 +122,6 @@ $toolbar-height: 46px;
 .slide-leave-active {
   transition: transform $duration--moderate-02 $exit-easing--productive;
 }
-.slide-enter, // Remove this vue2 based only class when switching to vue3
 .slide-enter-from, // This is vue3 based only class modified from 'slide-enter'
 .slide-leave-to {
   transform: translateY($toolbar-height);

@@ -205,17 +205,13 @@ onMounted(() => {
       });
     }
   });
-  eventBus.on('change-is-navigation-open', (isNavigationOpen) => {
-    isNavigationOpen.value = isNavigationOpen;
-    // console.log('After change isNavigationOpen...', isNavigationOpen.value)
+  eventBus.on('change-is-navigation-open', (value) => {
+    isNavigationOpen.value = value;
   });
 });
 
 const handleToggleNavigation = () => {
-  // this.$root.$emit('toggle-navigation');
-  // console.log('handle navigation onclick')
   isNavigationOpen.value = !isNavigationOpen.value;
-  //  console.log('isnavigation in handle navigation',isNavigationOpen.value );
   eventBus.emit('toggle-navigation', () => {
     isNavigationOpen;
   });
@@ -265,10 +261,10 @@ const setFocus = (event) => {
     padding: 0.68rem 1rem !important;
 
     &:hover {
-      background-color: theme-color-level(light, 10);
+      background-color: shift-color($light, 80%);
     }
     &:active {
-      background-color: theme-color-level(light, 9);
+      background-color: shift-color($light, 72%);
     }
     &:focus {
       @include focus-box-shadow;
@@ -277,7 +273,7 @@ const setFocus = (event) => {
   }
 
   .nav-item {
-    fill: theme-color('light');
+    fill: $light;
   }
 
   .navbar {
@@ -289,7 +285,7 @@ const setFocus = (event) => {
 
     .helper-menu {
       @include media-breakpoint-down(md) {
-        background-color: gray('800');
+        background-color: $gray-800;
         width: 100%;
         justify-content: flex-end;
         .nav-link .btn {
@@ -318,16 +314,16 @@ const setFocus = (event) => {
     .navbar-brand,
     .nav-link {
       color: #fff;
-      fill: theme-color('light');
+      fill: $light;
       transition: $focus-transition;
     }
     .nav-tags {
       color: #b9b9b9 !important;
-      @include media-breakpoint-down($responsive-layout-sm) {
+      @include media-breakpoint-down(sm) {
         @include visually-hidden;
       }
       .asset-tag {
-        @include media-breakpoint-down($responsive-layout-bp) {
+        @include media-breakpoint-down(xl) {
           @include visually-hidden;
         }
       }
@@ -335,7 +331,7 @@ const setFocus = (event) => {
   }
 
   .nav-trigger {
-    fill: theme-color('light');
+    fill: $light;
     width: $header-height;
     height: $header-height;
     transition: none;
@@ -348,12 +344,12 @@ const setFocus = (event) => {
     }
 
     &:hover {
-      fill: theme-color('light');
-      background-color: theme-color-level(light, 10);
+      fill: $light;
+      background-color: shift-color($light, 80%);
     }
 
     &.open {
-      background-color: gray('800');
+      background-color: $gray-800;
     }
 
     @include media-breakpoint-up($responsive-layout-bp) {
@@ -370,7 +366,7 @@ const setFocus = (event) => {
   }
 
   .navbar-expand {
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       flex-flow: wrap;
     }
     // .navbar-nav .nav-link {
@@ -386,7 +382,7 @@ const setFocus = (event) => {
   &:focus {
     box-shadow:
       inset 0 0 0 3px $navbar-color,
-      inset 0 0 0 5px color('white');
+      inset 0 0 0 5px $white;
     outline: 0;
   }
 }
@@ -403,7 +399,6 @@ const setFocus = (event) => {
 }
 #page-header .container-fluid {
   --bs-gutter-x: 0 !important;
-  --bs-gutter-y: 0 !important;
   justify-content: flex-start;
 }
 </style>

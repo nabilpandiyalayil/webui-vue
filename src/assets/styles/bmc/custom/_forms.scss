@@ -7,12 +7,12 @@
   line-height: $form-line-height;
   margin-top: - math.div($spacer, 4);
   margin-bottom: math.div($spacer, 2);
-  color: gray('700') !important;
+  color: $gray-700 !important;
 }
 
 // Legend label
 .col-form-label {
-  color: gray('800');
+  color: $gray-800;
   font-size: $form-label-font-size;
   line-height: $form-line-height;
 }
@@ -24,8 +24,8 @@
 .custom-select,
 .form-control,
 .input-group-text {
-  border-color: gray('500') !important;
-  background-color: gray('100');
+  border-color: $gray-500 !important;
+  background-color: $gray-100;
 }
 
 .custom-select,
@@ -34,35 +34,35 @@
     border: 1px solid $primary !important;
   }
   &:focus {
-    color: theme-color('dark');
-    background-color: gray('100');
+    color: $dark;
+    background-color: $gray-100;
     box-shadow:
-      inset 0 0 0 3px gray('100'),
+      inset 0 0 0 3px $gray-100,
       inset 0 0 0 5px $primary !important;
   }
   &:disabled {
-    background-color: gray('400');
-    color: gray('600');
+    background-color: $gray-400;
+    color: $gray-600;
   }
   &::placeholder {
-    color: gray('600');
+    color: $gray-600;
   }
   &.is-invalid,
   &:invalid {
-    border: 1px solid theme-color('danger') !important;
+    border: 1px solid $danger !important;
   }
 }
 
 .custom-select,
 .custom-control-label,
 .form-control {
-  color: theme-color('dark') !important;
+  color: $dark !important;
   font-size: 1rem;
 }
 
 // Inverted form colors
 .form-background {
-  background-color: gray('100');
+  background-color: $gray-100;
   .custom-select,
   .form-control {
     background-color: $white;
@@ -70,8 +70,8 @@
       background-color: $white;
     }
     &:disabled {
-      background-color: gray('400');
-      color: gray('600');
+      background-color: $gray-400;
+      color: $gray-600;
     }
   }
 }
@@ -96,13 +96,13 @@
     & + .custom-control-label {
       // Disabled label for checkbox, radio,
       // switch bootstrap form components
-      color: gray('600') !important;
+      color: $gray-600 !important;
     }
   }
 }
 
 .custom-control-input:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 2px theme-color('primary');
+  box-shadow: 0 0 0 2px $primary;
 }
 
 .custom-control-label::after {
@@ -119,7 +119,7 @@
   white-space: nowrap;
   margin-right: -$spacer;
   &.btn-link-primary {
-    color: theme-color('primary');
+    color: $primary;
     fill: currentColor;
   }
 }

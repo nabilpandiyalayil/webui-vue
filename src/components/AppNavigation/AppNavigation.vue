@@ -82,15 +82,10 @@ watch(route, () => {
   isNavigationOpen.value = false;
 });
 watch(isNavigationOpen, () => {
-  eventBus.emit('change-is-navigation-open', () => {
-    isNavigationOpen;
-  });
+  eventBus.emit('change-is-navigation-open', isNavigationOpen.value);
 });
 const toggleIsOpen = () => {
   isNavigationOpen.value = !isNavigationOpen.value;
-  eventBus.emit('change-is-navigation-open', () => {
-    isNavigationOpen.value;
-  });
 };
 // provide('toggle-navigation', toggleIsOpen);
 
@@ -169,48 +164,48 @@ svg {
   font-weight: $headings-font-weight;
   padding-left: $spacer; // defining consistent padding for links and buttons
   padding-right: $spacer;
-  color: #3f3f3f;
+  color: $secondary;
 
   &:hover {
-    background-color: #dadada;
-    color: #161616;
+    background-color: shift-color($dark, -84%);
+    color: $dark;
   }
 
   &:focus {
-    background-color: #f4f4f4;
-    box-shadow: inset 0 0 0 2px #0068b5;
+    background-color: shift-color($light, 0%);
+    box-shadow: inset 0 0 0 2px $primary;
     color: #161616;
     outline: 0;
   }
 
   &:active {
-    background-color: #3f3f3f;
+    background-color: $secondary;
     color: $white;
   }
 }
 .nav-nochild {
-  color: #3f3f3f !important;
+  color: $secondary !important;
   &:hover {
-    background-color: #dadada;
-    color: #161616;
+    background-color: shift-color($dark, -84%);
+    color: $dark;
   }
 
   &:focus {
-    background-color: #f4f4f4;
-    box-shadow: inset 0 0 0 2px #0068b5;
-    color: #161616;
+    background-color: $light;
+    box-shadow: inset 0 0 0 2px $primary;
+    color: $dark;
     outline: 0;
   }
   &:active {
-    background-color: #3f3f3f !important;
+    background-color: $secondary !important;
     color: $white !important;
   }
 }
 
 .nav-link--current {
   font-weight: $headings-font-weight;
-  background-color: #3f3f3f;
-  color: #f4f4f4;
+  background-color: $secondary;
+  color: $light;
   cursor: default;
   box-shadow: none;
 
@@ -221,19 +216,19 @@ svg {
     bottom: 0;
     left: 0;
     width: 4px;
-    background-color: #0068b5;
+    background-color: $primary;
   }
 
   &:hover,
   &:focus {
-    background-color: #3f3f3f;
-    color: #f4f4f4;
+    background-color: $secondary;
+    color: $light;
   }
 }
 .nav-items--current {
   font-weight: $headings-font-weight;
-  background-color: #3f3f3f;
-  color: #f4f4f4;
+  background-color: $secondary;
+  color: $light;
   cursor: default;
   box-shadow: none;
 
@@ -244,13 +239,13 @@ svg {
     bottom: 0;
     left: 0;
     width: 4px;
-    background-color: #0068b5;
+    background-color: $primary;
   }
 
   &:hover,
   &:focus {
-    background-color: #3f3f3f;
-    color: #f4f4f4;
+    background-color: $secondary;
+    color: $light;
   }
 }
 
@@ -262,17 +257,16 @@ svg {
   left: 0;
   z-index: $zindex-fixed;
   overflow-y: auto;
-  background-color: #f4f4f4;
+  background-color: $light;
   transform: translateX(-300px);
   transition: transform cubic-bezier(0.2, 0, 1, 0.9) 240ms;
-  border-right: 1px solid theme-color-level('light', 2.85);
+  border-right: 1px solid shift-color($light, 22.8%);
 
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(lg) {
     z-index: $zindex-fixed + 2;
   }
 
-  &.open,
-  &:focus-within {
+  &.open {
     transform: translateX(0);
     transition-timing-function: cubic-bezier(0, 0, 0.38, 0.9);
   }

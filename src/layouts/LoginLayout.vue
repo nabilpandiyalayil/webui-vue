@@ -42,7 +42,7 @@ const customizableGuiName = ref('BMC System Management');
 
 <style lang="scss" scoped>
 .login-container {
-  background: gray('100');
+  background: $gray-100;
   display: flex;
   flex-direction: column;
   gap: $spacer * 2;
@@ -62,7 +62,7 @@ const customizableGuiName = ref('BMC System Management');
   padding: $spacer * 3;
 
   @include media-breakpoint-up('md') {
-    background: gray('100');
+    background: $gray-100;
     display: flex;
     flex-direction: column;
     flex: 1 1 75%;
@@ -100,7 +100,7 @@ const customizableGuiName = ref('BMC System Management');
     display: inline-block;
     height: 2.5rem;
     width: 2px;
-    background-color: gray('200');
+    background-color: $gray-200;
     margin-left: $spacer * 1.5;
     vertical-align: middle;
   }

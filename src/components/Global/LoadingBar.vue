@@ -96,8 +96,8 @@ const hideLoadingBar = () => {
   //     opacity: 0;
   //   }
 
-  .fade-enter-from,
-  .fade-leave-to {
+  &.fade-enter-from,
+  &.fade-leave-to {
     opacity: 0;
   }
 }
