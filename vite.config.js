@@ -8,6 +8,7 @@ import Components from 'unplugin-vue-components/vite';
 import { BootstrapVueNextResolver } from 'unplugin-vue-components/resolvers';
 import viteCompression from 'vite-plugin-compression';
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
+import replace from '@rollup/plugin-replace';
 
 const CWD = process.cwd();
 const DEV_ENV_CONFIG = loadEnv('developement', CWD);
@@ -170,6 +171,13 @@ export default defineConfig({
           }
         },
       },
+      plugins: [
+        replace({
+          include: ['src/store/api.js'],
+          '/api': "''",
+          delimiters: ["'", "'"],
+        }),
+      ],
     },
   },
 });
