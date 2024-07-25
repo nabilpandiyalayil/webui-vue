@@ -1,7 +1,7 @@
 import event from '../../eventBus';
 import { ref } from 'vue';
 
-export function useLoadingBarComposable() {
+export default function useLoadingBarComposable() {
   const loading = ref(true);
 
   function startLoader() {

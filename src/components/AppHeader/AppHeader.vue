@@ -106,7 +106,7 @@
         </BNavbarNav>
       </BNavbar>
     </header>
-    <loading-bar @checkLoadingStatus="checkLoadingStatus" />
+    <loading-bar />
   </div>
 </template>
 

@@ -14,10 +14,6 @@ import ArrowRight16 from '@carbon/icons-vue/es/arrow--right/16';
 
 const pinia = createPinia();
 const app = createApp(App);
-pinia.use(({ store }) => {
-  store.$v = app.config;
-});
-
 app.use(pinia);
 app.use(router);
 app.component('IconArrowRight', ArrowRight16);

@@ -1,4 +1,3 @@
-<!-- TODO: Work Requird -->
 <template>
   <BTransition name="fade">
     <BProgress v-if="!isLoadingComplete">
@@ -13,21 +12,15 @@
 
 <script setup>
 import { ref, onBeforeMount } from 'vue';
-// import { useI18n } from 'vue-i18n';
 import eventBus from '@/eventBus';
 
 const loadingIndicatorValue = ref(0);
 const isLoadingComplete = ref(false);
 const loadingIntervalId = ref(null);
 const timeoutId = ref(null);
-// const emit = defineEmits();
-
-// const { t } = useI18n();
 
 onBeforeMount(() => {
-  console.log('on mounted');
   eventBus.on('loader-start', () => {
-    console.log('starte');
     startLoadingInterval();
   });
   eventBus.on('loader-end', () => {
@@ -38,8 +31,17 @@ onBeforeMount(() => {
   });
 });
 
+const clearLoadingInterval = () => {
+  if (loadingIntervalId.value) clearInterval(loadingIntervalId.value);
+  loadingIntervalId.value = null;
+};
+
+const clearLoadingTimeout = () => {
+  if (timeoutId.value) clearTimeout(timeoutId.value);
+  timeoutId.value = null;
+};
+
 const startLoadingInterval = () => {
-  console.log('start loading');
   clearLoadingInterval();
   clearLoadingTimeout();
   loadingIndicatorValue.value = 0;
@@ -52,36 +54,22 @@ const startLoadingInterval = () => {
 };
 
 const endLoadingInterval = () => {
-  console.log('ended');
   clearLoadingInterval();
   clearLoadingTimeout();
   loadingIndicatorValue.value = 100;
   timeoutId.value = setTimeout(() => {
     // Let animation complete before hiding
     // the loading bar
-    console.log(timeoutId.value);
     isLoadingComplete.value = true;
     eventBus.emit('checkLoadingStatus', isLoadingComplete.value);
   }, 1000);
 };
 
 const hideLoadingBar = () => {
-  console.log('Hidden');
   clearLoadingInterval();
   clearLoadingTimeout();
   loadingIndicatorValue.value = 0;
   isLoadingComplete.value = true;
-};
-
-const clearLoadingInterval = () => {
-  if (loadingIntervalId.value) clearInterval(loadingIntervalId.value);
-  loadingIntervalId.value = null;
-};
-
-const clearLoadingTimeout = () => {
-  console.log(timeoutId.value);
-  if (timeoutId.value) clearTimeout(timeoutId.value);
-  timeoutId.value = null;
 };
 </script>
 <style lang="scss" scoped>

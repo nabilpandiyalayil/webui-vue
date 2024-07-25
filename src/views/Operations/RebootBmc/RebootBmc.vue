@@ -59,13 +59,12 @@
 <script setup>
 import { ref, computed, onBeforeMount } from 'vue';
 import { onBeforeRouteLeave } from 'vue-router';
-import { useLoadingBarComposable } from '@/components/Composables/useLoadingBarComposable';
+import useLoadingBar from '@/components/Composables/useLoadingBarComposable';
 import useToast from '@/components/Composables/useToastComposable';
 import { ControlStore, BootSettingsStore } from '@/store';
 
 const { successToast, errorToast } = useToast();
-
-const { hideLoader, startLoader, endLoader } = useLoadingBarComposable();
+const { hideLoader, startLoader, endLoader } = useLoadingBar();
 
 onBeforeRouteLeave(() => {
   hideLoader();
@@ -109,5 +108,3 @@ onBeforeMount(() => {
   });
 });
 </script>
-
-<style lang="scss" scoped></style>

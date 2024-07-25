@@ -7,6 +7,7 @@
     <icon-secondary v-else />
   </span>
 </template>
+
 <script setup>
 import IconInfo from '@carbon/icons-vue/es/information--filled/20';
 import IconSuccess from '@carbon/icons-vue/es/checkmark--filled/20';
@@ -25,6 +26,7 @@ defineProps({
 <style lang="scss" scoped>
 .status-icon {
   vertical-align: text-bottom;
+
   &.info {
     color: $info;
   }
@@ -41,6 +43,7 @@ defineProps({
   &.warning {
     color: $warning;
   }
+
   svg {
     fill: currentColor;
   }

@@ -116,7 +116,7 @@ const login = () => {
     .catch((error) => console.log(error));
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .login-form {
   @include media-breakpoint-up('md') {
     max-width: 360px;
@@ -128,27 +128,27 @@ const login = () => {
 }
 .btn-primary {
   color: #ffffff;
-  // background-color: #0068b5;
-  // border-color: #0068b5;
+  background-color: #0068b5;
+  border-color: #0068b5;
   border-radius: 0;
   padding-top: 10px;
   padding-right: $spacer;
   padding-bottom: 10px;
   padding-left: $spacer;
-  // &:hover {
-  //   color: #ffffff;
-  //   background-color: #005ca1;
-  //   border-color: #005ca1;
-  // }
-  // &:active {
-  //   color: #ffffff;
-  //   background-color: #005ca1;
-  //   border-color: #005ca1;
-  // }
-  // &:focus {
-  //   color: #ffffff;
-  //   background-color: #005ca1;
-  //   border-color: #005ca1;
-  // }
+  &:hover {
+    color: #ffffff;
+    background-color: #005ca1;
+    border-color: #005ca1;
+  }
+  &:active {
+    color: #ffffff;
+    background-color: #005ca1;
+    border-color: #005ca1;
+  }
+  &:focus {
+    color: #ffffff;
+    background-color: #005ca1;
+    border-color: #005ca1;
+  }
 }
 </style>

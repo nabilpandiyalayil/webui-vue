@@ -1,42 +1,13 @@
 import api from '@/store/api';
 import i18n from '@/i18n';
-
 import { defineStore } from 'pinia';
 import { GlobalStore } from '@/store/modules/GlobalStore.js';
-
-/**
- * Watch for serverStatus changes in GlobalStore module
- * to set isOperationInProgress state
- * Stop watching status changes and resolve Promise when
- * serverStatus value matches passed argument or after 5 minutes
- * @param {string} serverStatus
- * @returns {Promise}
- */
-// const checkForServerStatus = function (serverStatus) {
-//   return new Promise((resolve) => {
-//     const timer = setTimeout(() => {
-//       resolve();
-//       unwatch();
-//     }, 300000 /*5mins*/);
-//     const unwatch = this.watch(
-//       (state) => state.global.serverStatus,
-//       (value) => {
-//         if (value === serverStatus) {
-//           resolve();
-//           unwatch();
-//           clearTimeout(timer);
-//         }
-//       },
-//     );
-//   });
-// };
 
 export const ControlStore = defineStore('control', {
   state: () => ({
     isOperationInProgress: false,
     lastPowerOperationTime: null,
     lastBmcRebootTime: null,
-    rand: 0,
   }),
   getters: {
     getIsOperationInProgress: (state) => state.isOperationInProgress,
@@ -53,20 +24,21 @@ export const ControlStore = defineStore('control', {
      * @returns {Promise}
      */
     async checkForServerStatus(serverStatus) {
+      // Action not tested. Remove this comment once the action is tested and verified.
       const global = GlobalStore();
       return new Promise((resolve) => {
         const timer = setTimeout(() => {
           resolve();
-          removeSub();
+          clearSub();
         }, 300000 /*5mins*/);
-        const removeSub = global.$subscribe(
+        const clearSub = global.$subscribe(
           ({ events }) => {
             if (
               events.key === 'serverStatus' &&
               events.newValue === serverStatus
             ) {
               resolve();
-              removeSub();
+              clearSub();
               clearTimeout(timer);
             }
           },
@@ -75,6 +47,7 @@ export const ControlStore = defineStore('control', {
       });
     },
     async fetchLastPowerOperationTime() {
+      // Action not tested. Remove this comment once the action is tested and verified.
       return await api
         .get('/redfish/v1/Systems/system')
         .then((response) => {
@@ -110,6 +83,7 @@ export const ControlStore = defineStore('control', {
         });
     },
     async serverPowerOn() {
+      // Action not tested. Remove this comment once the action is tested and verified.
       const data = { ResetType: 'On' };
       this.serverPowerChange(data);
       await this.checkForServerStatus('on');
@@ -117,6 +91,7 @@ export const ControlStore = defineStore('control', {
       this.fetchLastPowerOperationTime();
     },
     async serverSoftReboot() {
+      // Action not tested. Remove this comment once the action is tested and verified.
       const data = { ResetType: 'GracefulRestart' };
       this.serverPowerChange(data);
       await this.checkForServerStatus('on');
@@ -124,6 +99,7 @@ export const ControlStore = defineStore('control', {
       this.fetchLastPowerOperationTime();
     },
     async serverHardReboot() {
+      // Action not tested. Remove this comment once the action is tested and verified.
       const data = { ResetType: 'ForceRestart' };
       this.serverPowerChange(data);
       await this.checkForServerStatus('on');
@@ -131,6 +107,7 @@ export const ControlStore = defineStore('control', {
       this.fetchLastPowerOperationTime();
     },
     async serverSoftPowerOff() {
+      // Action not tested. Remove this comment once the action is tested and verified.
       const data = { ResetType: 'GracefulShutdown' };
       this.serverPowerChange(data);
       await this.checkForServerStatus('off');
@@ -138,6 +115,7 @@ export const ControlStore = defineStore('control', {
       this.fetchLastPowerOperationTime();
     },
     async serverHardPowerOff() {
+      // Action not tested. Remove this comment once the action is tested and verified.
       const data = { ResetType: 'ForceOff' };
       this.serverPowerChange(data);
       await this.checkForServerStatus('off');
@@ -145,6 +123,7 @@ export const ControlStore = defineStore('control', {
       this.fetchLastPowerOperationTime();
     },
     serverPowerChange(data) {
+      // Action not tested. Remove this comment once the action is tested and verified.
       this.isOperationInProgress = true;
       api
         .post('/redfish/v1/Systems/system/Actions/ComputerSystem.Reset', data)
