@@ -1,5 +1,5 @@
 <template>
-  <BAlert :model-value="show" :variant="variant" :class="{ small }">
+  <b-alert :show="show" :variant="variant" :class="{ small }">
     <div
       v-if="
         variant == 'info' ||
@@ -22,19 +22,26 @@
   </BAlert>
 </template>
 
-<script setup>
-import { defineProps } from 'vue';
-import StatusIcon from '../Global/StatusIcon.vue';
+<script>
+import StatusIcon from '@/components/Global/StatusIcon';
+import { BAlert } from 'bootstrap-vue';
 
-defineProps({
-  show: {
-    type: Boolean,
-    default: true,
+export default {
+  name: 'GlobalAlert',
+  components: {
+    BAlert: BAlert,
+    StatusIcon: StatusIcon,
   },
-  variant: {
-    type: String,
-    default: '',
+  props: {
+    show: {
+      type: Boolean,
+      default: true,
+    },
+    variant: {
+      type: String,
+      default: '',
+    },
+    small: Boolean,
   },
-  small: Boolean,
-});
+};
 </script>
