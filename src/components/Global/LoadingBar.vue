@@ -1,9 +1,9 @@
 <!-- TODO: Work Requird -->
 <template>
   <BTransition name="fade">
-    <BProgress v-if="!isLoadingComplete.value">
+    <BProgress v-if="!isLoadingComplete">
       <BProgressBar
-        :value="loadingIndicatorValue.value"
+        :value="loadingIndicatorValue"
         aria-label="Loading Progress"
         animated
       />
@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 // import { useI18n } from 'vue-i18n';
 import eventBus from '@/eventBus';
 
@@ -24,33 +24,24 @@ const timeoutId = ref(null);
 
 // const { t } = useI18n();
 
-onMounted(() => {
+onBeforeMount(() => {
   console.log('on mounted');
   eventBus.on('loader-start', () => {
-    startLoadingInterval;
+    console.log('starte');
+    startLoadingInterval();
   });
   eventBus.on('loader-end', () => {
-    endLoadingInterval;
+    endLoadingInterval();
   });
   eventBus.on('loader-hide', () => {
-    hideLoadingBar;
+    hideLoadingBar();
   });
 });
 
-const clearLoadingInterval = () => {
-  if (loadingIntervalId.value) clearInterval(loadingIntervalId.value);
-  loadingIntervalId.value = null;
-};
-
-const clearTimeout = () => {
-  if (timeoutId.value) clearTimeout(timeoutId.value);
-  timeoutId.value = null;
-};
-
 const startLoadingInterval = () => {
-  console.log('started');
+  console.log('start loading');
   clearLoadingInterval();
-  clearTimeout();
+  clearLoadingTimeout();
   loadingIndicatorValue.value = 0;
   isLoadingComplete.value = false;
   eventBus.emit('checkLoadingStatus', isLoadingComplete.value);
@@ -63,11 +54,12 @@ const startLoadingInterval = () => {
 const endLoadingInterval = () => {
   console.log('ended');
   clearLoadingInterval();
-  clearTimeout();
+  clearLoadingTimeout();
   loadingIndicatorValue.value = 100;
   timeoutId.value = setTimeout(() => {
     // Let animation complete before hiding
     // the loading bar
+    console.log(timeoutId.value);
     isLoadingComplete.value = true;
     eventBus.emit('checkLoadingStatus', isLoadingComplete.value);
   }, 1000);
@@ -76,9 +68,20 @@ const endLoadingInterval = () => {
 const hideLoadingBar = () => {
   console.log('Hidden');
   clearLoadingInterval();
-  clearTimeout();
+  clearLoadingTimeout();
   loadingIndicatorValue.value = 0;
   isLoadingComplete.value = true;
+};
+
+const clearLoadingInterval = () => {
+  if (loadingIntervalId.value) clearInterval(loadingIntervalId.value);
+  loadingIntervalId.value = null;
+};
+
+const clearLoadingTimeout = () => {
+  console.log(timeoutId.value);
+  if (timeoutId.value) clearTimeout(timeoutId.value);
+  timeoutId.value = null;
 };
 </script>
 <style lang="scss" scoped>
@@ -90,12 +93,6 @@ const hideLoadingBar = () => {
   opacity: 1;
   transition: opacity $duration--moderate-01 $standard-easing--productive;
   height: 0.4rem;
-
-  //   &.fade-enter-from, // This is vue3 based only class modified from 'fade-enter'
-  //   &.fade-leave-to {
-  //     opacity: 0;
-  //   }
-
   &.fade-enter-from,
   &.fade-leave-to {
     opacity: 0;
