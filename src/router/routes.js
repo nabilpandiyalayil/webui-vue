@@ -11,6 +11,7 @@ import Sensors from '@/views/HardwareStatus/Sensors';
 import PageNotFound from '@/views/PageNotFound/PageNotFound.vue';
 import KeyClear from '@/views/Operations/KeyClear/KeyClear.vue';
 import RebootBmc from '@/views/Operations/RebootBmc';
+import Power from '@/views/ResourceManagement/Power';
 const roles = {
   administrator: 'Administrator',
   operator: 'Operator',
@@ -84,6 +85,14 @@ export const routes = [
         component: RebootBmc,
         meta: {
           title: i18n.global.t('appPageTitle.rebootBmc'),
+        },
+      },
+      {
+        path: '/resource-management/power',
+        name: 'power',
+        component: Power,
+        meta: {
+          title: i18n.global.t('appPageTitle.power'),
         },
       },
       {
