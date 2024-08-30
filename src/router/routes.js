@@ -12,6 +12,7 @@ import PageNotFound from '@/views/PageNotFound/PageNotFound.vue';
 import KeyClear from '@/views/Operations/KeyClear/KeyClear.vue';
 import RebootBmc from '@/views/Operations/RebootBmc';
 import Power from '@/views/ResourceManagement/Power';
+import PowerRestorePolicy from '@/views/Settings/PowerRestorePolicy';
 const roles = {
   administrator: 'Administrator',
   operator: 'Operator',
@@ -93,6 +94,14 @@ export const routes = [
         component: Power,
         meta: {
           title: i18n.global.t('appPageTitle.power'),
+        },
+      },
+      {
+        path: '/settings/power-restore-policy',
+        name: 'power-restore-policy',
+        component: PowerRestorePolicy,
+        meta: {
+          title: i18n.global.t('appPageTitle.powerRestorePolicy'),
         },
       },
       {
