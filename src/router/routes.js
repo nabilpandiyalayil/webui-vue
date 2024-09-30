@@ -19,6 +19,7 @@ import PowerRestorePolicy from '@/views/Settings/PowerRestorePolicy';
 import ConcurrentMaintenance from '../views/HardwareStatus/ConcurrentMaintenance/ConcurrentMaintenance.vue';
 import IBMiServiceFunctions from '@/views/Logs/IBMiServiceFunctions';
 import Notices from '@/views/Notices/Notices.vue';
+import Firmware from '@/views/Operations/Firmware';
 
 const roles = {
   administrator: 'Administrator',
@@ -126,6 +127,14 @@ export const routes = [
         component: FactoryReset,
         meta: {
           title: i18n.global.t('appPageTitle.factoryReset'),
+        },
+      },
+      {
+        path: '/operations/firmware',
+        name: 'firmware',
+        component: Firmware,
+        meta: {
+          title: i18n.global.t('appPageTitle.firmware'),
         },
       },
       {

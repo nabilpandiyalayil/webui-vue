@@ -15,6 +15,8 @@ import PowerPolicyStore from './modules/Settings/PowerPolicyStore';
 import ConcurrentMaintenanceStore from './modules/HardwareStatus/ConcurrentMaintenanceStore';
 import IBMiServiceFunctionsStore from './modules/Logs/IBMiServiceFunctionsStore';
 import AuditLogsStore from './modules/Logs/AuditLogsStore';
+import LicenseStore from './modules/ResourceManagement/LicenseStore';
+import BmcStore from './modules/HardwareStatus/BmcStore';
 
 // ... (export use other stores)
 export {
@@ -34,4 +36,6 @@ export {
   ConcurrentMaintenanceStore,
   IBMiServiceFunctionsStore,
   AuditLogsStore,
+  LicenseStore,
+  BmcStore,
 };
