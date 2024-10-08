@@ -2,19 +2,18 @@ import api from '@/store/api';
 import i18n from '@/i18n';
 import { defineStore } from 'pinia';
 
-const FirmwareStore = defineStore('firmware', {
+export const FirmwareStore = defineStore('firmware', {
   state: () => ({
     bmcFirmware: [],
     hostFirmware: [],
     bmcActiveFirmwareId: null,
     hostActiveFirmwareId: null,
     applyTime: null,
-    httpPushUri: null,
-    tftpAvailable: false,
     firmwareBootSide: null,
+    lowestSupportedFirmwareVersion: '',
+    showAlert: false,
   }),
   getters: {
-    isTftpUploadAvailable: (state) => state.tftpAvailable,
     isSingleFileUploadEnabled: (state) => state.hostFirmware.length === 0,
     activeBmcFirmware: (state) => {
       return state.bmcFirmware.find(
@@ -36,8 +35,29 @@ const FirmwareStore = defineStore('firmware', {
         (firmware) => firmware.id !== state.hostActiveFirmwareId,
       );
     },
+    firmwareBootSideGetter: (state) => state.firmwareBootSide,
+    lowestSupportedFirmwareVersionGetter: (state) =>
+      state.lowestSupportedFirmwareVersion,
+    showAlertGetter: (state) => state.showAlert,
   },
   actions: {
+    async getLowestSupportedFirmwareVersion() {
+      await api.get('/redfish/v1/Managers/bmc').then((response) =>
+        api
+          .get(response.data.Links.ActiveSoftwareImage['@odata.id'])
+          .then((response) => {
+            let lowestSupportedFirmware;
+            if (Object.keys(response.data).includes('LowestSupportedVersion')) {
+              this.showAlert = true;
+              lowestSupportedFirmware = response.data.LowestSupportedVersion;
+            } else {
+              this.showAlert = false;
+            }
+            this.lowestSupportedFirmwareVersion = lowestSupportedFirmware;
+          }),
+      );
+      return this.lowestSupportedFirmwareVersion;
+    },
     async getFirmwareInformation() {
       this.getActiveHostFirmware();
       this.getActiveBmcFirmware();
@@ -58,6 +78,15 @@ const FirmwareStore = defineStore('firmware', {
         .then(({ data: { Links } }) => {
           const id = Links?.ActiveSoftwareImage['@odata.id'].split('/').pop();
           this.hostActiveFirmwareId = id;
+        })
+        .catch((error) => console.log(error));
+    },
+    getFirmwareBootSide() {
+      return api
+        .get('/redfish/v1/Systems/system/Bios')
+        .then(({ data }) => {
+          const fwBootSide = data.Attributes.fw_boot_side_current;
+          this.firmwareBootSide = fwBootSide;
         })
         .catch((error) => console.log(error));
     },
@@ -102,16 +131,7 @@ const FirmwareStore = defineStore('firmware', {
         .then(({ data }) => {
           const applyTime =
             data.HttpPushUriOptions.HttpPushUriApplyTime.ApplyTime;
-          const allowableActions =
-            data?.Actions?.['#UpdateService.SimpleUpdate']?.[
-              'TransferProtocol@Redfish.AllowableValues'
-            ];
           this.applyTime = applyTime;
-          const httpPushUri = data.HttpPushUri;
-          this.httpPushUri = httpPushUri;
-          if (allowableActions?.includes('TFTP')) {
-            this.tftpAvailable = true;
-          }
         })
         .catch((error) => console.log(error));
     },
@@ -135,36 +155,18 @@ const FirmwareStore = defineStore('firmware', {
         await this.setApplyTimeImmediate();
       }
       return await api
-        .post(this.httpPushUri, image, {
+        .post('/redfish/v1/UpdateService/update', image, {
           headers: { 'Content-Type': 'application/octet-stream' },
         })
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('pageFirmware.toast.errorUpdateFirmware'));
+          throw new Error(
+            i18n.global.t('pageFirmware.toast.errorUpdateFirmware'),
+          );
         });
     },
-    async uploadFirmwareTFTP(fileAddress) {
-      const data = {
-        TransferProtocol: 'TFTP',
-        ImageURI: fileAddress,
-      };
-      if (this.applyTime !== 'Immediate') {
-        // ApplyTime must be set to Immediate before making
-        // request to update firmware
-        await this.setApplyTimeImmediate();
-      }
-      return await api
-        .post(
-          '/redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate',
-          data,
-        )
-        .catch((error) => {
-          console.log(error);
-          throw new Error(i18n.t('pageFirmware.toast.errorUpdateFirmware'));
-        });
-    },
-    async switchBmcFirmwareAndReboot({ getters }) {
-      const backupLocation = getters.backupBmcFirmware.location;
+    async switchBmcFirmwareAndReboot() {
+      const backupLocation = this.backupBmcFirmware.location;
       const data = {
         Links: {
           ActiveSoftwareImage: {
@@ -176,7 +178,9 @@ const FirmwareStore = defineStore('firmware', {
         .patch('/redfish/v1/Managers/bmc', data)
         .catch((error) => {
           console.log(error);
-          throw new Error(i18n.t('pageFirmware.toast.errorSwitchImages'));
+          throw new Error(
+            i18n.global.t('pageFirmware.toast.errorSwitchImages'),
+          );
         });
     },
   },
