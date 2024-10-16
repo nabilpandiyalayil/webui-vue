@@ -47,13 +47,14 @@
 
 <script setup>
 import { ref, watch, computed } from 'vue';
-import event from '../../eventBus';
 import useVuelidateComposable from '@/components/Composables/useVuelidateComposable';
 import { useVuelidate } from '@vuelidate/core';
 const fromDate = ref('');
 const toDate = ref('');
 const { getValidationState } = useVuelidateComposable();
 const offsetToDate = ref('');
+
+const emit = defineEmits(['change']);
 
 const rules = computed(() => ({
   fromDate: {
@@ -89,7 +90,7 @@ watch(toDate, (newVal) => {
 });
 
 const emitChange = () => {
-  event.emit('change', {
+  emit('change', {
     fromDate: fromDate.value ? new Date(fromDate.value) : null,
     toDate: toDate.value ? new Date(offsetToDate.value) : null,
   });
