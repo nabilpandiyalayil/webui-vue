@@ -6,7 +6,7 @@
           <b-form-group>
             <b-form-checkbox
               v-model="idlePowerSaver.isIdlePowerSaverEnabled"
-              :disabled="loading || safeMode"
+              :disabled="isDisabled"
               data-test-id="power-checkbox-toggleIdlePower"
               name="idle-power-saver"
             >
@@ -22,7 +22,7 @@
         @submit.prevent="saveIdlePowerSaverData"
         @reset.prevent="resetIdlePowerSaverData"
       >
-        <b-form-group :disabled="loading || safeMode">
+        <b-form-group :disabled="isDisabled">
           <div class="font-weight-bold mb-2">{{ $t('pagePower.toEnter') }}</div>
           <b-row>
             <b-col sm="8" md="6" xl="4">
@@ -196,6 +196,14 @@ export default {
       type: Boolean,
       default: null,
     },
+    oemMode: {
+      type: Boolean,
+      default: null,
+    },
+    nonIdlePowerSaverMode: {
+      type: Boolean,
+      default: null,
+    },
   },
   data() {
     return {
@@ -217,11 +225,27 @@ export default {
     idlePowerSaverData() {
       return this.$store.getters['powerControl/idlePowerSaverData'];
     },
+    isDisabled() {
+      return (
+        this.loading ||
+        this.safeMode ||
+        this.oemMode ||
+        this.nonIdlePowerSaverMode
+      );
+    },
+  },
+  watch: {
+    idlePowerSaverData: function (newValue) {
+      if (this.nonIdlePowerSaverMode || this.safeMode || this.oemMode) {
+        this.setIdlePowerSaveFormValues(null);
+      } else {
+        this.setIdlePowerSaveFormValues(newValue);
+      }
+    },
   },
   created() {
     this.startLoader();
     this.$store.dispatch('powerControl/getIdlePowerSaverData').finally(() => {
-      this.setIdlePowerSaveFormValues(this.idlePowerSaverData);
       this.endLoader();
     });
   },
