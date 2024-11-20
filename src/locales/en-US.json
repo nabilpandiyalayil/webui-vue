@@ -1438,8 +1438,8 @@
       "message3Link": "server power operations"
     },
     "oemMode": {
-      "message1": "System is currently in Custom mode.",
-      "message2": "Change mode by selecting on the appropriate option."
+      "message1": "System is currently in a custom mode.",
+      "message2": "Change mode by selecting an option below."
     },
     "delayTimeValidation": {
       "delayTimeRange": "Value must be between %{min} and %{max}.",

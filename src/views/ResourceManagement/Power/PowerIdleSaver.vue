@@ -226,19 +226,12 @@ export default {
       return this.$store.getters['powerControl/idlePowerSaverData'];
     },
     isDisabled() {
-      return (
-        this.loading ||
-        this.safeMode ||
-        this.oemMode ||
-        this.nonIdlePowerSaverMode
-      );
+      return this.loading || this.safeMode || this.nonIdlePowerSaverMode;
     },
   },
   watch: {
     idlePowerSaverData: function (newValue) {
-      if (this.nonIdlePowerSaverMode || this.safeMode || this.oemMode) {
-        this.setIdlePowerSaveFormValues(null);
-      } else {
+      if (!this.safeMode) {
         this.setIdlePowerSaveFormValues(newValue);
       }
     },

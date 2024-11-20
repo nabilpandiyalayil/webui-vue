@@ -189,6 +189,11 @@ export default {
         .then(() => this.$store.dispatch('powerControl/getIdlePowerSaverData'))
         .catch(({ message }) => {
           this.errorToast(message);
+          this.$store
+            .dispatch('powerControl/getPowerPerformanceMode')
+            .then(() =>
+              this.setPowerPerformanceValue(this.powerPerformanceModeData)
+            );
         })
         .finally(() => this.endLoader());
     },

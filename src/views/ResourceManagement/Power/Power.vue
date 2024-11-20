@@ -70,12 +70,9 @@ export default {
       return this.$store.getters['powerControl/oemMode'];
     },
     nonIdlePowerSaverMode() {
-      return (
-        this.$store.getters['powerControl/powerPerformanceMode'] ===
-          'EfficiencyFavorPower' ||
-        this.$store.getters['powerControl/powerPerformanceMode'] ===
-          'PowerSaving'
-      );
+      return this.$store.getters['powerControl/idlePowerSaverData']
+        ? false
+        : true;
     },
   },
   created() {
