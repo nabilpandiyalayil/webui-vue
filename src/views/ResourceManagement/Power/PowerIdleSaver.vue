@@ -2,6 +2,19 @@
   <div>
     <page-section :section-title="$t('pagePower.idlePower')">
       <b-row>
+        <b-col sm="8" md="8" xl="6">
+          <alert
+            v-if="nonIdlePowerSaverMode && !loading"
+            variant="info"
+            class="mb-4"
+          >
+            <p class="mb-0">
+              {{ $t('pagePower.nonIdlePowerSaverMode') }}
+            </p></alert
+          >
+        </b-col>
+      </b-row>
+      <b-row>
         <b-col sm="8" md="6" xl="12">
           <b-form-group>
             <b-form-checkbox
@@ -179,12 +192,14 @@ import PageSection from '@/components/Global/PageSection';
 import LoadingBarMixin, { loading } from '@/components/Mixins/LoadingBarMixin';
 import VuelidateMixin from '@/components/Mixins/VuelidateMixin.js';
 import BVToastMixin from '@/components/Mixins/BVToastMixin';
+import Alert from '@/components/Global/Alert';
 import { between, maxValue, minValue } from 'vuelidate/lib/validators';
 
 export default {
   name: 'Power',
   components: {
     PageSection,
+    Alert,
   },
   mixins: [VuelidateMixin, BVToastMixin, LoadingBarMixin],
   beforeRouteLeave(to, from, next) {

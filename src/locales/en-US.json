@@ -1439,6 +1439,7 @@
       "message1": "System is currently in a custom mode.",
       "message2": "Change mode by selecting an option below."
     },
+    "nonIdlePowerSaverMode": "Idle power saver is not supported in current mode.",
     "delayTimeValidation": {
       "delayTimeRange": "Value must be between %{min} and %{max}.",
       "enterDelayTime": "Value cannot be less than delay time to exit.",
