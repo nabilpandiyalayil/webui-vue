@@ -3,7 +3,6 @@
     <BModal
       v-model="modal"
       id="generate-csr"
-      ref="modal"
       size="lg"
       no-stacking
       :title="$t('pageCertificates.modal.generateACertificateSigningRequest')"
@@ -218,6 +217,7 @@
                       "
                       placeholder=""
                       data-test-id="modalGenerateCsr-input-alternateName"
+                      add-button-variant="link-primary"
                     >
                       <template #add-button-text>
                         <icon-add /> {{ $t('global.action.add') }}
@@ -333,7 +333,9 @@
       no-stacking
       size="lg"
       @cancel="copyCsrString"
-      :cancel-title="csrStringCopied ? $t('global.status.copied') : $t('global.action.copy')"
+      :cancel-title="
+        csrStringCopied ? $t('global.status.copied') : $t('global.action.copy')
+      "
       @ok="downloadCsr"
       :ok-title="$t('global.action.download')"
       :title="$t('pageCertificates.modal.certificateSigningRequest')"
@@ -350,6 +352,8 @@ import { useVuelidate } from '@vuelidate/core';
 
 import { required, requiredIf } from '@vuelidate/validators';
 import { CertificatesStore } from '@/store';
+
+import IconAdd from '@carbon/icons-vue/es/add--alt/20';
 
 import { COUNTRY_LIST } from './CsrCountryCodes';
 import { CERTIFICATE_TYPES } from '@/store/modules/SecurityAndAccess/CertificatesStore';
@@ -423,7 +427,7 @@ const rules = computed(() => ({
   },
 }));
 const v$ = useVuelidate(rules, { form });
-const modal = ref(true);
+const modal = ref(false);
 
 const handleSubmit = () => {
   v$.value.$touch();
@@ -477,21 +481,31 @@ const copyCsrString = (bvModalEvt) => {
   });
 };
 
-  const downloadCsr = (bvModalEvt) => {
-    // prevent modal close
-    bvModalEvt.preventDefault();
-    const dataUri = `data:text/plain;charset=utf-8,${encodeURIComponent(csrString.value)}`;
-    const link = document.createElement('a');
-    link.href = dataUri;
-    link.download = 'certificate-signing-request.txt'; // Specify the file name
-    document.body.appendChild(link);
-    link.click(); // Trigger the download
-    document.body.removeChild(link); // Clean up
-  };
+const downloadCsr = (bvModalEvt) => {
+  // prevent modal close
+  bvModalEvt.preventDefault();
+  const dataUri = `data:text/plain;charset=utf-8,${encodeURIComponent(csrString.value)}`;
+  const link = document.createElement('a');
+  link.href = dataUri;
+  link.download = 'certificate-signing-request.txt'; // Specify the file name
+  document.body.appendChild(link);
+  link.click(); // Trigger the download
+  document.body.removeChild(link); // Clean up
+};
 </script>
 
 <style scoped>
 .span-csr-string {
   white-space: pre;
+}
+
+.b-form-tags :deep(ul li .d-flex) {
+  margin-bottom: 0px;
+}
+
+:deep(.btn-close) {
+  top: 0px;
+  font-size: 100% !important;
+  --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232d60e5'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
 }
 </style>

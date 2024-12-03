@@ -1,4 +1,4 @@
-import api from '@/store/api'; //  { getResponseCount }
+import api from '@/store/api';
 import i18n from '@/i18n';
 // import { REGEX_MAPPINGS } from '@/utilities/GlobalConstants';
 import { defineStore } from 'pinia';
@@ -43,26 +43,27 @@ export const UserManagementStore = defineStore('userManagment', {
       return await api
         .get('/redfish/v1/AccountService/Accounts')
         .then((response) =>
-          response.data.Members.map((user) => user['@odata.id']),
+          response.data.Members.map((user) => user['@odata.id'])
         )
         .then((userIds) => {
-          api.all(userIds.map((user) => api.get(user)))
-          .then((users) => {
-            const userData = users.map((user) => user.data);
-            this.allUsers = userData;
-          })
-          .catch((error) => {
-            console.log(error);
-            const message = i18n.global.t(
-              'pageUserManagement.toast.errorLoadUsers',
-            );
-            throw new Error(message);
-          });
+          api
+            .all(userIds.map((user) => api.get(user)))
+            .then((users) => {
+              const userData = users.map((user) => user.data);
+              this.allUsers = userData;
+            })
+            .catch((error) => {
+              console.log(error);
+              const message = i18n.global.t(
+                'pageUserManagement.toast.errorLoadUsers'
+              );
+              throw new Error(message);
+            });
         })
         .catch((error) => {
           console.log(error);
           const message = i18n.global.t(
-            'pageUserManagement.toast.errorLoadUsers',
+            'pageUserManagement.toast.errorLoadUsers'
           );
           throw new Error(message);
         });

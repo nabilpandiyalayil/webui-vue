@@ -224,16 +224,17 @@ const bmcTime = computed(() => {
 const expiredCertificateTypes = computed(() => {
   return certificates.value.reduce((acc, val) => {
     const daysUntilExpired = getDaysUntilExpired(val.validUntil);
-    if (daysUntilExpired < 1) {
+    if (daysUntilExpired < 0) {
       acc.push(val.certificate);
     }
     return acc;
   }, []);
 });
+
 const expiringCertificateTypes = computed(() => {
   return certificates.value.reduce((acc, val) => {
     const daysUntilExpired = getDaysUntilExpired(val.validUntil);
-    if (daysUntilExpired < 31 && daysUntilExpired > 0) {
+    if (daysUntilExpired < 31 && daysUntilExpired >= 0) {
       acc.push(val.certificate);
     }
     return acc;
@@ -266,11 +267,11 @@ const onTableRowAction = (event, rowItem) => {
 };
 const initModalUploadCertificate = (certificate = null) => {
   modalCertificate.value = certificate;
-  // this.$bvModal.show('upload-certificate');
   eventBus.emit('upload-certificate');
 };
 const initModalDeleteCertificate = (certificate) => {
   modalContent.value = certificate.certificate;
+  modalCertificate.value = certificate;
   certificate.actions.forEach((action) => {
     if (action.enabled !== undefined) {
       modal.value = action.enabled;
@@ -278,6 +279,7 @@ const initModalDeleteCertificate = (certificate) => {
   });
 };
 const onModalDelete = (deleteConfirmed) => {
+  const certificate = modalCertificate.value;
   if (deleteConfirmed)
     deleteCertificate({
       type: certificate.certificate,
@@ -296,45 +298,45 @@ const onModalOk = ({ addNew, file, type, location }) => {
 const addNewCertificate = (file, type) => {
   startLoader();
   if (type === 'ServiceLogin Certificate') {
-    certificate.addNewACFCertificate({ file, type })
-        .then((success) => toast.successToast(success))
-        .catch(({ message }) => toast.errorToast(message))
-        .finally(() => endLoader());
+    certificate
+      .addNewACFCertificate({ file, type })
+      .then((success) => toast.successToast(success))
+      .catch(({ message }) => toast.errorToast(message))
+      .finally(() => endLoader());
   } else {
-    certificate.addNewCertificate({ file, type })
-        .then((success) => toast.successToast(success))
-        .catch(({ message }) => toast.errorToast(message))
-        .finally(() => endLoader());
+    certificate
+      .addNewCertificate({ file, type })
+      .then((success) => toast.successToast(success))
+      .catch(({ message }) => toast.errorToast(message))
+      .finally(() => endLoader());
   }
 };
 const replaceCertificate = (file, type, location) => {
   startLoader();
   if (type === 'ServiceLogin Certificate') {
-    return (
-      certificate.replaceACFCertificate({
+    return certificate
+      .replaceACFCertificate({
         file,
         type,
         location,
       })
-        .then((success) => toast.successToast(success))
-        .catch(({ message }) => toast.errorToast(message))
-        .finally(() => endLoader())
-    );
+      .then((success) => toast.successToast(success))
+      .catch(({ message }) => toast.errorToast(message))
+      .finally(() => endLoader());
   } else {
     const reader = new FileReader();
     reader.readAsBinaryString(file);
     reader.onloadend = (event) => {
       const certificateString = event.target.result;
-      return (
-        certificate.replaceCertificate({
+      return certificate
+        .replaceCertificate({
           certificateString,
           type,
           location,
         })
-          .then((success) => toast.successToast(success))
-          .catch(({ message }) => toast.errorToast(message))
-          .finally(() => endLoader())
-      );
+        .then((success) => toast.successToast(success))
+        .catch(({ message }) => toast.errorToast(message))
+        .finally(() => endLoader());
     };
   }
 };
@@ -342,7 +344,7 @@ const deleteCertificate = ({ type, location }) => {
   startLoader();
   Promise.all([deleteCertificateChecker(type, location)])
     .then((success) => {
-      toast.successToast(success);
+      toast.successToast(success[0]);
       certificate.getAcfCertificate();
       certificate.getCertificates();
     })
@@ -351,33 +353,29 @@ const deleteCertificate = ({ type, location }) => {
 };
 const deleteCertificateChecker = (type, location) => {
   if (type === 'ServiceLogin Certificate') {
-    return (
-      certificates.value.deleteACFCertificate({
-        type,
-        location,
-      })
-    );
+    return certificate.deleteACFCertificate({
+      type,
+      location,
+    });
   } else {
-    return (
-      certificate.deleteCertificate({
-        type,
-        location,
-      })
-    );
+    return certificate.deleteCertificate({
+      type,
+      location,
+    });
   }
 };
 const getDaysUntilExpired = (date) => {
   if (bmcTime.value) {
     const validUntilMs = date.getTime();
-    const currentBmcTimeMs = bmcTime.value.toLocaleDateString();
+    const currentBmcTimeMs = bmcTime.value.getTime();
     const oneDayInMs = 24 * 60 * 60 * 1000;
-    return Math.round((validUntilMs - currentBmcTimeMs.value) / oneDayInMs);
+    return Math.round((validUntilMs - currentBmcTimeMs) / oneDayInMs);
   }
   return new Date();
 };
 const getIconStatus = (date) => {
   const daysUntilExpired = getDaysUntilExpired(date);
-  if (daysUntilExpired < 1) {
+  if (daysUntilExpired < 0) {
     return 'danger';
   } else if (daysUntilExpired < 31) {
     return 'warning';

@@ -33,7 +33,7 @@ export const CERTIFICATE_TYPES = [
 ];
 const getCertificateProp = (type, prop) => {
   const certificate = CERTIFICATE_TYPES.find(
-    (certificate) => certificate.type === type,
+    (certificate) => certificate.type === type
   );
   return certificate ? certificate[prop] : null;
 };
@@ -45,7 +45,6 @@ const convertFileToBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 export const CertificatesStore = defineStore('certificates', {
-  namespaced: true,
   state: () => {
     return {
       allCertificates: [],
@@ -84,7 +83,7 @@ export const CertificatesStore = defineStore('certificates', {
             } else {
               this.acfCertificate = [];
             }
-          },
+          }
         )
         .catch((error) => console.log(error));
     },
@@ -96,11 +95,11 @@ export const CertificatesStore = defineStore('certificates', {
             data: {
               Links: { Certificates },
             },
-          }) => Certificates.map((certificate) => certificate['@odata.id']),
+          }) => Certificates.map((certificate) => certificate['@odata.id'])
         )
         .then((certificateLocations) => {
           const promises = certificateLocations.map((location) =>
-            api.get(location),
+            api.get(location)
           );
           api.all(promises).then(
             api.spread((...responses) => {
@@ -124,7 +123,7 @@ export const CertificatesStore = defineStore('certificates', {
               });
               this.allCertificates = certificates;
               this.getAvailableCertificates();
-            }),
+            })
           );
         });
     },
@@ -146,7 +145,7 @@ export const CertificatesStore = defineStore('certificates', {
       });
       this.availableUploadTypes = availableUploadTypes;
     },
-    async addNewACFCertificate({ dispatch }, { file, type }) {
+    async addNewACFCertificate({ file, type }) {
       const base64File = await convertFileToBase64(file);
       const fileObj = {
         Oem: {
@@ -162,8 +161,8 @@ export const CertificatesStore = defineStore('certificates', {
           headers: { 'Content-Type': 'application/octet-stream' },
         })
         .then(() => {
-          dispatch('getAcfCertificate');
-          dispatch('getCertificates');
+          this.getAcfCertificate();
+          this.getCertificates();
         })
         .then(() => {
           return i18n.global.t('pageCertificates.toast.successAddCertificate', {
@@ -173,11 +172,11 @@ export const CertificatesStore = defineStore('certificates', {
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.global.t('pageCertificates.toast.errorAddCertificate'),
+            i18n.global.t('pageCertificates.toast.errorAddCertificate')
           );
         });
     },
-    async addNewACFCertificateOnLoginPage(_, { file, type }) {
+    async addNewACFCertificateOnLoginPage({ file, type }) {
       const base64File = await convertFileToBase64(file);
       const fileObj = {
         Oem: {
@@ -195,47 +194,47 @@ export const CertificatesStore = defineStore('certificates', {
         .then(() =>
           i18n.global.t('pageCertificates.toast.successAddCertificate', {
             certificate: getCertificateProp(type, 'label'),
-          }),
+          })
         )
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.global.t('pageCertificates.toast.errorAddCertificate'),
+            i18n.global.t('pageCertificates.toast.errorAddCertificate')
           );
         });
     },
-    async addNewCertificate({ dispatch }, { file, type }) {
+    async addNewCertificate({ file, type }) {
       const typeOfCertificate = getCertificateProp(type, 'label');
       return await api
         .post(getCertificateProp(type, 'location'), file, {
           headers: { 'Content-Type': 'application/x-pem-file' },
         })
-        .then(() => dispatch('getCertificates'))
+        .then(() => this.getCertificates())
         .then(() => {
           if (typeOfCertificate === 'HTTPS Certificate') {
             return i18n.global.t(
               'pageCertificates.toast.successAddedHTTPCertificate',
               {
                 certificate: getCertificateProp(type, 'label'),
-              },
+              }
             );
           } else {
             return i18n.global.t(
               'pageCertificates.toast.successAddCertificate',
               {
                 certificate: getCertificateProp(type, 'label'),
-              },
+              }
             );
           }
         })
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.global.t('pageCertificates.toast.errorAddCertificate'),
+            i18n.global.t('pageCertificates.toast.errorAddCertificate')
           );
         });
     },
-    async replaceACFCertificate({ dispatch }, { file, type, location }) {
+    async replaceACFCertificate({ file, type, location }) {
       const base64File = await convertFileToBase64(file);
       const fileObj = {
         Oem: {
@@ -251,25 +250,22 @@ export const CertificatesStore = defineStore('certificates', {
           headers: { 'Content-Type': 'application/octet-stream' },
         })
         .then(() => {
-          dispatch('getAcfCertificate');
-          dispatch('getCertificates');
+          this.getAcfCertificate();
+          this.getCertificates();
         })
         .then(() =>
           i18n.global.t('pageCertificates.toast.successReplaceCertificate', {
             certificate: getCertificateProp(type, 'label'),
-          }),
+          })
         )
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.global.t('pageCertificates.toast.errorReplaceCertificate'),
+            i18n.global.t('pageCertificates.toast.errorReplaceCertificate')
           );
         });
     },
-    async replaceCertificate(
-      { dispatch },
-      { certificateString, location, type },
-    ) {
+    async replaceCertificate({ certificateString, location, type }) {
       const data = {};
       data.CertificateString = certificateString;
       data.CertificateType = 'PEM';
@@ -278,11 +274,11 @@ export const CertificatesStore = defineStore('certificates', {
       return await api
         .post(
           '/redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate',
-          data,
+          data
         )
         .then(() => {
-          dispatch('getAcfCertificate');
-          dispatch('getCertificates');
+          this.getAcfCertificate();
+          this.getCertificates();
         })
         .then(() => {
           if (typeOfCertificate === 'HTTPS Certificate') {
@@ -290,25 +286,25 @@ export const CertificatesStore = defineStore('certificates', {
               'pageCertificates.toast.successReplacedHTTPCertificate',
               {
                 certificate: getCertificateProp(type, 'label'),
-              },
+              }
             );
           } else {
             return i18n.global.t(
               'pageCertificates.toast.successReplaceCertificate',
               {
                 certificate: getCertificateProp(type, 'label'),
-              },
+              }
             );
           }
         })
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.global.t('pageCertificates.toast.errorReplaceCertificate'),
+            i18n.global.t('pageCertificates.toast.errorReplaceCertificate')
           );
         });
     },
-    async deleteACFCertificate({ dispatch }, { type, location }) {
+    async deleteACFCertificate({ type, location }) {
       const data = {
         Oem: {
           IBM: {
@@ -320,32 +316,32 @@ export const CertificatesStore = defineStore('certificates', {
       };
       return await api
         .patch(location, data)
-        .then(() => dispatch('getCertificates'))
+        .then(() => this.getCertificates())
         .then(() =>
           i18n.global.t('pageCertificates.toast.successDeleteCertificate', {
             certificate: getCertificateProp(type, 'label'),
-          }),
+          })
         )
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.global.t('pageCertificates.toast.errorDeleteCertificate'),
+            i18n.global.t('pageCertificates.toast.errorDeleteCertificate')
           );
         });
     },
-    async deleteCertificate({ dispatch }, { type, location }) {
+    async deleteCertificate({ type, location }) {
       return await api
         .delete(location)
-        .then(() => dispatch('getCertificates'))
+        .then(() => this.getCertificates())
         .then(() =>
           i18n.global.t('pageCertificates.toast.successDeleteCertificate', {
             certificate: getCertificateProp(type, 'label'),
-          }),
+          })
         )
         .catch((error) => {
           console.log(error);
           throw new Error(
-            i18n.global.t('pageCertificates.toast.errorDeleteCertificate'),
+            i18n.global.t('pageCertificates.toast.errorDeleteCertificate')
           );
         });
     },
@@ -384,7 +380,7 @@ export const CertificatesStore = defineStore('certificates', {
       return await api
         .post(
           '/redfish/v1/CertificateService/Actions/CertificateService.GenerateCSR',
-          data,
+          data
         )
         //TODO: Success response also throws error so
         // can't accurately show legitimate error in UI

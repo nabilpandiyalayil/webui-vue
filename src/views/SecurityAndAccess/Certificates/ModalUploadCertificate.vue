@@ -1,7 +1,7 @@
 <template>
   <BModal
     id="upload-certificate"
-    ref="modal"
+    v-model="modal"
     :title="
       certificate
         ? $t('pageCertificates.replaceCertificate')
@@ -105,16 +105,16 @@ const props = defineProps({
     default: null,
   },
 });
-const modal = ref(null);
+const modal = ref(false);
 eventBus.on('upload-certificate', () => {
-  modal.value.show();
+  modal.value = true;
 });
 const form = ref({
   certificateType: null,
   file: null,
 });
 const certificateTypes = computed(() => {
-  return uploadCertificate.availableUploadTypes;
+  return uploadCertificate.availableUploadTypesGetter;
 });
 const certificateOptions = computed(() => {
   const filteredCertificates = certificateTypes.value
@@ -151,7 +151,7 @@ const isNotAdmin = computed(() => {
 
 watch(certificateOptions, (options) => {
   if (options.length) {
-    form.certificateType = options[0].value;
+    form.value.certificateType = options[0].value;
   }
 });
 
@@ -170,36 +170,31 @@ const rules = computed(() => ({
 const v$ = useVuelidate(rules, { form });
 const emit = defineEmits(['ok']);
 function onFileUpload(uploadedfile) {
-  console.log('Uploadedfile', uploadedfile);
   form.value.file = uploadedfile;
-  v$.value.form.file.$touch()
+  v$.value.form.file.$touch();
 }
 const handleSubmit = () => {
-  console.log('propsCertificate', props.certificate);
-  console.log('formFile', form, form.certificateType, form.file);
   v$.value.$touch();
   if (v$.value.$invalid) return;
   emit('ok', {
     addNew: !props.certificate,
-    file: form.file,
+    file: form.value.file,
     location: props.certificate ? props.certificate.location : null,
     type: props.certificate
       ? props.certificate.certificate
-      : form.valuecertificateType,
+      : form.value.certificateType,
   });
   closeModal();
 };
 const closeModal = () => {
-  eventBus.on('upload-certificate', () => {
-    modal.value.hidden();
-  });
-  v$.value.$reset();
+  modal.value = false;
 };
 const resetForm = () => {
-  form.certificateType = certificateOptions.value.length
+  form.value.certificateType = certificateOptions.value.length
     ? certificateOptions.value[0].value
     : null;
-  form.file = null;
+  form.value.file = null;
+  eventBus.emit('clear-file');
   v$.value.$reset();
 };
 const onOk = (bvModalEvt) => {
