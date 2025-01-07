@@ -38,7 +38,7 @@
               dataFormatterGlobal.dataFormatter(
                 network.dhcpAddress.length !== 0
                   ? network.dhcpAddress[0].Address
-                  : null,
+                  : null
               )
             }}
           </dd>
@@ -60,6 +60,6 @@ const dataFormatterGlobal = useDataFormatterGlobal();
 const networkStore = NetworkStore();
 networkStore.getEthernetData();
 const network = computed(() => {
-  return networkStore.globalNetworkSettings[0];
+  // return networkStore.globalNetworkSettings[0];
 });
 </script>

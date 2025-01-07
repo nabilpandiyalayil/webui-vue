@@ -16,7 +16,7 @@
           <b-form-group
             v-if="
               hmcManagedChecks(
-                $t(`${'pageServerPowerOperations.biosSettings'}.${key}`),
+                $t(`${'pageServerPowerOperations.biosSettings'}.${key}`)
               )
             "
             :key="key"
@@ -84,14 +84,14 @@
                     <p>
                       {{
                         $t(
-                          'pageServerPowerOperations.biosSettings.currentOperatingModeNormal',
+                          'pageServerPowerOperations.biosSettings.currentOperatingModeNormal'
                         )
                       }}
                     </p>
                     <p>
                       {{
                         $t(
-                          'pageServerPowerOperations.biosSettings.selectedOperatingModeManual',
+                          'pageServerPowerOperations.biosSettings.selectedOperatingModeManual'
                         )
                       }}
                     </p>
@@ -110,9 +110,9 @@
                               : powerPolicy === 'AlwaysOn'
                                 ? $t(`pagePowerRestorePolicy.policies.AlwaysOn`)
                                 : $t(
-                                    `pagePowerRestorePolicy.policies.LastState`,
+                                    `pagePowerRestorePolicy.policies.LastState`
                                   ),
-                        },
+                        }
                       )
                     }}
                   </div>
@@ -129,14 +129,14 @@
                     <p>
                       {{
                         $t(
-                          'pageServerPowerOperations.biosSettings.currentOperatingModeManual',
+                          'pageServerPowerOperations.biosSettings.currentOperatingModeManual'
                         )
                       }}
                     </p>
                     <p>
                       {{
                         $t(
-                          'pageServerPowerOperations.biosSettings.selectedOperatingModeNormal',
+                          'pageServerPowerOperations.biosSettings.selectedOperatingModeNormal'
                         )
                       }}
                     </p>
@@ -155,9 +155,9 @@
                               : powerPolicy === 'AlwaysOn'
                                 ? $t(`pagePowerRestorePolicy.policies.AlwaysOn`)
                                 : $t(
-                                    `pagePowerRestorePolicy.policies.LastState`,
+                                    `pagePowerRestorePolicy.policies.LastState`
                                   ),
-                        },
+                        }
                       )
                     }}
                   </div>
@@ -170,7 +170,7 @@
                           `pageServerPowerOperations.biosSettings.currentOperatingModeManual`,
                           {
                             currOptMode: currentOperatingMode,
-                          },
+                          }
                         )
                       }}
                     </p>
@@ -189,9 +189,9 @@
                               : powerPolicy === 'AlwaysOn'
                                 ? $t(`pagePowerRestorePolicy.policies.AlwaysOn`)
                                 : $t(
-                                    `pagePowerRestorePolicy.policies.LastState`,
+                                    `pagePowerRestorePolicy.policies.LastState`
                                   ),
-                        },
+                        }
                       )
                     }}
                   </div>
@@ -224,7 +224,7 @@
                   >
                     {{
                       $t(
-                        'pageServerPowerOperations.biosSettings.attributeValues.pvm_system_power_off_policy.powerOffHelperText',
+                        'pageServerPowerOperations.biosSettings.attributeValues.pvm_system_power_off_policy.powerOffHelperText'
                       )
                     }}
                   </b-form-text>
@@ -236,7 +236,7 @@
                   >
                     {{
                       $t(
-                        'pageServerPowerOperations.biosSettings.attributeValues.pvm_system_power_off_policy.automaticHelperText',
+                        'pageServerPowerOperations.biosSettings.attributeValues.pvm_system_power_off_policy.automaticHelperText'
                       )
                     }}
                   </b-form-text>
@@ -248,7 +248,7 @@
                   >
                     {{
                       $t(
-                        'pageServerPowerOperations.biosSettings.attributeValues.pvm_system_power_off_policy.stayOnHelperText',
+                        'pageServerPowerOperations.biosSettings.attributeValues.pvm_system_power_off_policy.stayOnHelperText'
                       )
                     }}
                   </b-form-text>
@@ -273,7 +273,7 @@
             :key="index"
             :label="
               $t(
-                `${'pageServerPowerOperations.biosSettings'}.${taggedSetting.settingKey}`,
+                `${'pageServerPowerOperations.biosSettings'}.${taggedSetting.settingKey}`
               )
             "
             class="mb-4"
@@ -286,7 +286,7 @@
               @input="
                 changeTaggedSettingsValue(
                   taggedSetting.settingKey,
-                  taggedSetting.settingValue,
+                  taggedSetting.settingValue
                 )
               "
             >
@@ -310,7 +310,7 @@
           class="mb-4"
           :label="
             $t(
-              `${'pageServerPowerOperations.biosSettings.pvm_linux_kvm_percentage'}`,
+              `${'pageServerPowerOperations.biosSettings.pvm_linux_kvm_percentage'}`
             )
           "
         >
@@ -356,7 +356,7 @@
           >
             {{
               $t(
-                'pageServerPowerOperations.biosSettings.linuxKvmPercentage.errorMessage',
+                'pageServerPowerOperations.biosSettings.linuxKvmPercentage.errorMessage'
               )
             }}
           </span>
@@ -431,7 +431,7 @@
             <template #table-caption>
               {{
                 $t(
-                  'pageServerPowerOperations.biosSettings.pvm_ibmi_load_source',
+                  'pageServerPowerOperations.biosSettings.pvm_ibmi_load_source'
                 )
               }}
               ({{ $t('pageServerPowerOperations.biosSettings.nonHMCManaged') }})
@@ -447,7 +447,7 @@
             <template #table-caption>
               {{
                 $t(
-                  'pageServerPowerOperations.biosSettings.pvm_ibmi_alt_load_source',
+                  'pageServerPowerOperations.biosSettings.pvm_ibmi_alt_load_source'
                 )
               }}
               ({{ $t('pageServerPowerOperations.biosSettings.nonHMCManaged') }})
@@ -477,7 +477,7 @@
             <template #table-caption>
               {{
                 $t(
-                  'pageServerPowerOperations.biosSettings.pvm_linux_kvm_memory',
+                  'pageServerPowerOperations.biosSettings.pvm_linux_kvm_memory'
                 )
               }}
               ({{ $t('pageServerPowerOperations.biosSettings.nonHMCManaged') }})
@@ -493,7 +493,7 @@
             <template #table-caption>
               {{
                 $t(
-                  'pageServerPowerOperations.biosSettings.pvm_linux_kvm_percentage',
+                  'pageServerPowerOperations.biosSettings.pvm_linux_kvm_percentage'
                 )
               }}
               ({{ $t('pageServerPowerOperations.biosSettings.nonHMCManaged') }})
@@ -504,456 +504,498 @@
     </b-row>
   </div>
 </template>
-<script>
-import Alert from '@/components/Global/Alert';
-import IconChevron from '@carbon/icons-vue/es/chevron--up/20';
 
-export default {
-  name: 'BiosSettings',
-  components: { Alert, IconChevron },
-  props: {
-    attributeValues: {
-      type: Object,
-      default: null,
-    },
-    disabled: {
-      type: Boolean,
-      require: true,
-    },
-    isInPhypStandby: {
-      type: Boolean,
-      default: false,
-    },
+<script script>
+import { ref, computed, watch, onBeforeMount } from 'vue';
+import Alert from '@/components/Global/Alert.vue';
+import IconChevron from '@carbon/icons-vue/es/chevron--up/20';
+import { GlobalStore, BootSettingsStore, ResourceMemoryStore } from '@/store';
+
+const globalStore = GlobalStore();
+const bootSettingsStore = BootSettingsStore();
+
+defineProps({
+  attributeValues: {
+    type: Object,
+    default: null,
   },
-  data() {
-    return {
-      isLinuxKvmValid: true,
-      manualMode: 'Manual',
-      normalMode: 'Normal',
-      currentOperatingMode: '',
-      selectedOperatingMode: '',
-      taggedSettingsArr: ['Current configuration', 'none'],
-      taggedSettings: [
-        {
-          settingKey: 'pvm_ibmi_load_source',
-          settingValue: 'Current configuration',
-        },
-        {
-          settingKey: 'pvm_ibmi_alt_load_source',
-          settingValue: 'Current configuration',
-        },
-        {
-          settingKey: 'pvm_ibmi_console',
-          settingValue: 'Current configuration',
-        },
-      ],
-      powerRestorePolicy:
-        this.$store.getters['serverBootSettings/powerRestorePolicyValue'],
-      fields: [
-        {
-          key: 'setting',
-          label: this.$t('pagePower.tableRoles.setting'),
-          sortable: false,
-        },
-        {
-          key: 'description',
-          label: this.$t('pagePower.tableRoles.description'),
-          sortable: false,
-        },
-      ],
-      linuxKvmPercentageFields: [
-        {
-          key: 'description',
-          label: this.$t('pagePower.tableRoles.description'),
-          sortable: false,
-        },
-      ],
-      taggedSettingsFields: [
-        {
-          key: 'description',
-          label: this.$t('pagePower.tableRoles.description'),
-          sortable: false,
-        },
-      ],
-      serverFirmwareItems: [
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.serverFirmwareItems.setting.autoStartOnly',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.serverFirmwareItems.description.autoStartOnly',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.serverFirmwareItems.setting.autoStartAlways',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.serverFirmwareItems.description.autoStartAlways',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.serverFirmwareItems.setting.standBy',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.serverFirmwareItems.description.standBy',
-          ),
-        },
-      ],
-      defaultPartitionItems: [
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.defaultPartitionItems.setting.aix',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.defaultPartitionItems.description.aix',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.defaultPartitionItems.setting.linux',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.defaultPartitionItems.description.linux',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.defaultPartitionItems.setting.ibmI',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.defaultPartitionItems.description.ibmI',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.defaultPartitionItems.setting.linuxKVM',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.defaultPartitionItems.description.linuxKVM',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.defaultPartitionItems.setting.default',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.defaultPartitionItems.description.default',
-          ),
-        },
-      ],
-      aixPartitionItems: [
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.aixPartitionItems.setting.partitionBoot',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.aixPartitionItems.description.partitionBoot',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.aixPartitionItems.setting.serviceBoot',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.aixPartitionItems.description.serviceBoot',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.aixPartitionItems.setting.bootToSms',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.aixPartitionItems.description.bootToSms',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.aixPartitionItems.setting.bootToOpenFirware',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.aixPartitionItems.description.bootToOpenFirware',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.aixPartitionItems.setting.serviceBootMode',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.aixPartitionItems.description.serviceBootMode',
-          ),
-        },
-      ],
-      ibmiItems: [
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.ibmiItems.setting.a',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.ibmiItems.description.a',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.ibmiItems.setting.b',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.ibmiItems.description.b',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.ibmiItems.setting.c',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.ibmiItems.description.c',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.ibmiItems.setting.d',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.ibmiItems.description.d',
-          ),
-        },
-      ],
-      linuxKvmItems: [
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.linuxKvmItems.setting.automatic',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.linuxKvmItems.description.automatic',
-          ),
-        },
-        {
-          setting: this.$t(
-            'pageServerPowerOperations.biosSettings.linuxKvmItems.setting.custom',
-          ),
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.linuxKvmItems.description.custom',
-          ),
-        },
-      ],
-      linuxKvmPercentageItems: [
-        {
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.linuxKvmPercentage.description',
-          ),
-        },
-      ],
-      ibmiLoadSourceItems: [
-        {
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.ibmiLoadSource.description',
-          ),
-        },
-      ],
-      ibmiAltLoadSourceItems: [
-        {
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.ibmiAltLoadSource.description',
-          ),
-        },
-      ],
-      ibmiConsoleItems: [
-        {
-          description: this.$t(
-            'pageServerPowerOperations.biosSettings.ibmiConsole.description',
-          ),
-        },
-      ],
-    };
+  disabled: {
+    type: Boolean,
+    require: true,
   },
-  computed: {
-    hmcManaged() {
-      return this.$store.getters['resourceMemory/hmcManaged'];
-    },
-    attributeKeys() {
-      return this.$store.getters['serverBootSettings/biosAttributes'];
-    },
-    isAtleastPhypInStandby() {
-      return this.$store.getters['global/isInPhypStandby'];
-    },
-    manualModeSelected() {
-      return this.selectedOperatingMode === this.manualMode;
-    },
-    powerPolicy() {
-      return this.$store.getters['serverBootSettings/powerRestorePolicyValue'];
-    },
-    ibmiLoadSourceValue() {
-      return this.$store.getters['serverBootSettings/ibmiLoadSourceValue'];
-    },
-    ibmiAltLoadSourceValue() {
-      return this.$store.getters['serverBootSettings/ibmiAltLoadSourceValue'];
-    },
-    ibmiConsoleValue() {
-      return this.$store.getters['serverBootSettings/ibmiConsoleValue'];
-    },
-    taggedSettingValues() {
-      let taggedSettingsInfo = this.taggedSettings;
-      taggedSettingsInfo[0].settingValue = this.ibmiLoadSourceValue;
-      taggedSettingsInfo[1].settingValue = this.ibmiAltLoadSourceValue;
-      taggedSettingsInfo[2].settingValue = this.ibmiConsoleValue;
-      return taggedSettingsInfo;
-    },
-    linuxKvmPercentageCurrentValue() {
-      return this.$store.getters[
-        'serverBootSettings/linuxKvmPercentageCurrentValue'
-      ];
-    },
-    linuxKvmPercentageInitialValue() {
-      return this.$store.getters[
-        'serverBootSettings/linuxKvmPercentageInitialValue'
-      ];
-    },
-    linuxKvmPercentageValue: {
-      get() {
-        return this.$store.getters[
-          'serverBootSettings/linuxKvmPercentageValue'
-        ];
-      },
-      set(newValue) {
-        return newValue;
-      },
-    },
-    locationCodes() {
-      return this.$store.getters['serverBootSettings/locationCodes'];
-    },
-    taggedSettingsOptions() {
-      let taggedSettingsList = [...this.taggedSettingsArr];
-      return [...taggedSettingsList, ...this.locationCodes];
-    },
+  isInPhypStandby: {
+    type: Boolean,
+    default: false,
   },
-  created() {
-    this.$store.dispatch('serverBootSettings/getLocationCodes');
-    this.$store.dispatch('resourceMemory/getHmcManaged');
-    this.currentOperatingMode = this.attributeKeys['pvm_system_operating_mode'];
-    if (this.currentOperatingMode === this.manualMode) {
-      this.onChangeSystemOpsMode(this.manualMode);
-    }
+});
+
+const isLinuxKvmValid = ref(true);
+const manualMode = ref('Manual');
+const normalMode = ref('Normal');
+const currentOperatingMode = ref('');
+const selectedOperatingMode = ref('');
+const taggedSettingsArr = ref(['Current configuration', 'none']);
+const taggedSettings = ref([
+  {
+    settingKey: 'pvm_ibmi_load_source',
+    settingValue: 'Current configuration',
   },
-  updated() {
-    if (this.attributeKeys['pvm_linux_kvm_memory'] === 'Custom') {
-      this.attributeKeys['pvm_linux_kvm_percentage'] =
-        this.linuxKvmPercentageValue * 10;
-    } else {
-      this.attributeKeys['pvm_linux_kvm_percentage'] =
-        this.linuxKvmPercentageInitialValue * 10;
-    }
-    this.attributeKeys['pvm_ibmi_load_source'] =
-      this.taggedSettingValues[0].settingValue;
-    this.attributeKeys['pvm_ibmi_alt_load_source'] =
-      this.taggedSettingValues[1].settingValue;
-    this.attributeKeys['pvm_ibmi_console'] =
-      this.taggedSettingValues[2].settingValue;
-    this.$emit('updated-attributes', this.attributeKeys);
-    this.$emit('is-linux-kvm-valid', this.isLinuxKvmValid);
+  {
+    settingKey: 'pvm_ibmi_alt_load_source',
+    settingValue: 'Current configuration',
   },
-  methods: {
-    hmcManagedChecks(value) {
-      if (!this.isHmcManaged()) return true;
-      if (
-        value ===
-        this.$t('pageServerPowerOperations.biosSettings.pvm_stop_at_standby')
-      )
-        return true;
-      return false;
-    },
-    isHmcManaged() {
-      return this.hmcManaged === 'Enabled' ? true : false;
-    },
-    onChangeSystemOpsMode(value) {
-      this.selectedOperatingMode = value;
-      if (this.selectedOperatingMode === this.normalMode) {
-        if (this.currentOperatingMode === this.selectedOperatingMode) {
-          this.$store.dispatch('serverBootSettings/getOperatingModeSettings');
-        } else {
-          this.$store.commit(
-            'serverBootSettings/setAutomaticRetryConfigValue',
-            'RetryAttempts',
-          );
-          this.$store.commit(
-            'serverBootSettings/setStopBootOnFaultValue',
-            'Never',
-          );
-          this.$store.commit(
-            'serverBootSettings/setPowerRestorePolicyValue',
-            'LastState',
-          );
-        }
-      } else if (this.selectedOperatingMode === this.manualMode) {
-        this.$store.commit(
-          'serverBootSettings/setAutomaticRetryConfigValue',
-          'Disabled',
-        );
-        this.$store.commit(
-          'serverBootSettings/setStopBootOnFaultValue',
-          'Never',
-        );
-        this.$store.commit(
-          'serverBootSettings/setPowerRestorePolicyValue',
-          'AlwaysOff',
-        );
-      }
-    },
-    changeLinuxKvmPercentageValue(value) {
-      let valueAsString = value.toString();
-      let regex = /^\d+(\.\d?)?$/;
-      if (regex.test(valueAsString)) {
-        this.isLinuxKvmValid = true;
-      } else {
-        this.isLinuxKvmValid = false;
-      }
-      this.$store.dispatch(
-        'serverBootSettings/saveLinuxPercentageValue',
-        value,
-      );
-    },
-    changeTaggedSettingsValue(key, value) {
-      this.$store.dispatch('serverBootSettings/saveTaggedSettingsValue', {
-        key,
-        value,
-      });
-    },
-    validateLinuxKvmPercentage($event) {
-      let keyCode = $event.keyCode ? $event.keyCode : $event.which;
-      let percentageValue = $event.target.value + $event.key;
-      let decimalSet = $event.key === '.';
-      if (!decimalSet) {
-        // only allow number and one decimal
-        if (
-          (keyCode < 48 || keyCode > 57) &&
-          (keyCode !== 46 || percentageValue.indexOf('.') != -1)
-        ) {
-          // 46 is decimal
-          $event.preventDefault();
-        }
-      }
-    },
-    validateAttributeKeys(defaultPartitionEnvironment, key) {
-      if (key === 'pvm_rpa_boot_mode') {
-        return (
-          defaultPartitionEnvironment === 'Default' ||
-          defaultPartitionEnvironment === 'AIX' ||
-          defaultPartitionEnvironment === 'Linux'
-        );
-      } else if (key === 'pvm_os_boot_type') {
-        return !(
-          defaultPartitionEnvironment === 'AIX' ||
-          defaultPartitionEnvironment === 'Linux' ||
-          defaultPartitionEnvironment === 'Linux KVM'
-        );
-      } else if (key === 'pvm_linux_kvm_memory') {
-        return defaultPartitionEnvironment === 'Linux KVM';
-      } else {
-        return true;
-      }
-    },
+  {
+    settingKey: 'pvm_ibmi_console',
+    settingValue: 'Current configuration',
   },
-};
+]);
+
+// export default {
+//   name: 'BiosSettings',
+//   components: { Alert, IconChevron },
+//   props: {
+//     attributeValues: {
+//       type: Object,
+//       default: null,
+//     },
+//     disabled: {
+//       type: Boolean,
+//       require: true,
+//     },
+//     isInPhypStandby: {
+//       type: Boolean,
+//       default: false,
+//     },
+//   },
+//   data() {
+//     return {
+//       isLinuxKvmValid: true,
+//       manualMode: 'Manual',
+//       normalMode: 'Normal',
+//       currentOperatingMode: '',
+//       selectedOperatingMode: '',
+//       taggedSettingsArr: ['Current configuration', 'none'],
+//       taggedSettings: [
+//         {
+//           settingKey: 'pvm_ibmi_load_source',
+//           settingValue: 'Current configuration',
+//         },
+//         {
+//           settingKey: 'pvm_ibmi_alt_load_source',
+//           settingValue: 'Current configuration',
+//         },
+//         {
+//           settingKey: 'pvm_ibmi_console',
+//           settingValue: 'Current configuration',
+//         },
+//       ],
+//       powerRestorePolicy:
+//         this.$store.getters['serverBootSettings/powerRestorePolicyValue'],
+//       fields: [
+//         {
+//           key: 'setting',
+//           label: this.$t('pagePower.tableRoles.setting'),
+//           sortable: false,
+//         },
+//         {
+//           key: 'description',
+//           label: this.$t('pagePower.tableRoles.description'),
+//           sortable: false,
+//         },
+//       ],
+//       linuxKvmPercentageFields: [
+//         {
+//           key: 'description',
+//           label: this.$t('pagePower.tableRoles.description'),
+//           sortable: false,
+//         },
+//       ],
+//       taggedSettingsFields: [
+//         {
+//           key: 'description',
+//           label: this.$t('pagePower.tableRoles.description'),
+//           sortable: false,
+//         },
+//       ],
+//       serverFirmwareItems: [
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.serverFirmwareItems.setting.autoStartOnly'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.serverFirmwareItems.description.autoStartOnly'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.serverFirmwareItems.setting.autoStartAlways'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.serverFirmwareItems.description.autoStartAlways'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.serverFirmwareItems.setting.standBy'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.serverFirmwareItems.description.standBy'
+//           ),
+//         },
+//       ],
+//       defaultPartitionItems: [
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.defaultPartitionItems.setting.aix'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.defaultPartitionItems.description.aix'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.defaultPartitionItems.setting.linux'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.defaultPartitionItems.description.linux'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.defaultPartitionItems.setting.ibmI'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.defaultPartitionItems.description.ibmI'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.defaultPartitionItems.setting.linuxKVM'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.defaultPartitionItems.description.linuxKVM'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.defaultPartitionItems.setting.default'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.defaultPartitionItems.description.default'
+//           ),
+//         },
+//       ],
+//       aixPartitionItems: [
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.aixPartitionItems.setting.partitionBoot'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.aixPartitionItems.description.partitionBoot'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.aixPartitionItems.setting.serviceBoot'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.aixPartitionItems.description.serviceBoot'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.aixPartitionItems.setting.bootToSms'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.aixPartitionItems.description.bootToSms'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.aixPartitionItems.setting.bootToOpenFirware'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.aixPartitionItems.description.bootToOpenFirware'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.aixPartitionItems.setting.serviceBootMode'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.aixPartitionItems.description.serviceBootMode'
+//           ),
+//         },
+//       ],
+//       ibmiItems: [
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.ibmiItems.setting.a'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.ibmiItems.description.a'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.ibmiItems.setting.b'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.ibmiItems.description.b'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.ibmiItems.setting.c'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.ibmiItems.description.c'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.ibmiItems.setting.d'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.ibmiItems.description.d'
+//           ),
+//         },
+//       ],
+//       linuxKvmItems: [
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.linuxKvmItems.setting.automatic'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.linuxKvmItems.description.automatic'
+//           ),
+//         },
+//         {
+//           setting: this.$t(
+//             'pageServerPowerOperations.biosSettings.linuxKvmItems.setting.custom'
+//           ),
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.linuxKvmItems.description.custom'
+//           ),
+//         },
+//       ],
+//       linuxKvmPercentageItems: [
+//         {
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.linuxKvmPercentage.description'
+//           ),
+//         },
+//       ],
+//       ibmiLoadSourceItems: [
+//         {
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.ibmiLoadSource.description'
+//           ),
+//         },
+//       ],
+//       ibmiAltLoadSourceItems: [
+//         {
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.ibmiAltLoadSource.description'
+//           ),
+//         },
+//       ],
+//       ibmiConsoleItems: [
+//         {
+//           description: this.$t(
+//             'pageServerPowerOperations.biosSettings.ibmiConsole.description'
+//           ),
+//         },
+//       ],
+//     };
+//   },
+//   computed: {
+//     hmcManaged() {
+//       return this.$store.getters['resourceMemory/hmcManaged'];
+//     },
+//     attributeKeys() {
+//       return this.$store.getters['serverBootSettings/biosAttributes'];
+//     },
+//     isAtleastPhypInStandby() {
+//       return this.$store.getters['global/isInPhypStandby'];
+//     },
+//     manualModeSelected() {
+//       return this.selectedOperatingMode === this.manualMode;
+//     },
+//     powerPolicy() {
+//       return this.$store.getters['serverBootSettings/powerRestorePolicyValue'];
+//     },
+//     ibmiLoadSourceValue() {
+//       return this.$store.getters['serverBootSettings/ibmiLoadSourceValue'];
+//     },
+//     ibmiAltLoadSourceValue() {
+//       return this.$store.getters['serverBootSettings/ibmiAltLoadSourceValue'];
+//     },
+//     ibmiConsoleValue() {
+//       return this.$store.getters['serverBootSettings/ibmiConsoleValue'];
+//     },
+//     taggedSettingValues() {
+//       let taggedSettingsInfo = this.taggedSettings;
+//       taggedSettingsInfo[0].settingValue = this.ibmiLoadSourceValue;
+//       taggedSettingsInfo[1].settingValue = this.ibmiAltLoadSourceValue;
+//       taggedSettingsInfo[2].settingValue = this.ibmiConsoleValue;
+//       return taggedSettingsInfo;
+//     },
+//     linuxKvmPercentageCurrentValue() {
+//       return this.$store.getters[
+//         'serverBootSettings/linuxKvmPercentageCurrentValue'
+//       ];
+//     },
+//     linuxKvmPercentageInitialValue() {
+//       return this.$store.getters[
+//         'serverBootSettings/linuxKvmPercentageInitialValue'
+//       ];
+//     },
+//     linuxKvmPercentageValue: {
+//       get() {
+//         return this.$store.getters[
+//           'serverBootSettings/linuxKvmPercentageValue'
+//         ];
+//       },
+//       set(newValue) {
+//         return newValue;
+//       },
+//     },
+//     locationCodes() {
+//       return this.$store.getters['serverBootSettings/locationCodes'];
+//     },
+//     taggedSettingsOptions() {
+//       let taggedSettingsList = [...this.taggedSettingsArr];
+//       return [...taggedSettingsList, ...this.locationCodes];
+//     },
+//   },
+//   created() {
+//     this.$store.dispatch('serverBootSettings/getLocationCodes');
+//     this.$store.dispatch('resourceMemory/getHmcManaged');
+//     this.currentOperatingMode = this.attributeKeys['pvm_system_operating_mode'];
+//     if (this.currentOperatingMode === this.manualMode) {
+//       this.onChangeSystemOpsMode(this.manualMode);
+//     }
+//   },
+//   updated() {
+//     if (this.attributeKeys['pvm_linux_kvm_memory'] === 'Custom') {
+//       this.attributeKeys['pvm_linux_kvm_percentage'] =
+//         this.linuxKvmPercentageValue * 10;
+//     } else {
+//       this.attributeKeys['pvm_linux_kvm_percentage'] =
+//         this.linuxKvmPercentageInitialValue * 10;
+//     }
+//     this.attributeKeys['pvm_ibmi_load_source'] =
+//       this.taggedSettingValues[0].settingValue;
+//     this.attributeKeys['pvm_ibmi_alt_load_source'] =
+//       this.taggedSettingValues[1].settingValue;
+//     this.attributeKeys['pvm_ibmi_console'] =
+//       this.taggedSettingValues[2].settingValue;
+//     this.$emit('updated-attributes', this.attributeKeys);
+//     this.$emit('is-linux-kvm-valid', this.isLinuxKvmValid);
+//   },
+//   methods: {
+//     hmcManagedChecks(value) {
+//       if (!this.isHmcManaged()) return true;
+//       if (
+//         value ===
+//         this.$t('pageServerPowerOperations.biosSettings.pvm_stop_at_standby')
+//       )
+//         return true;
+//       return false;
+//     },
+//     isHmcManaged() {
+//       return this.hmcManaged === 'Enabled' ? true : false;
+//     },
+//     onChangeSystemOpsMode(value) {
+//       this.selectedOperatingMode = value;
+//       if (this.selectedOperatingMode === this.normalMode) {
+//         if (this.currentOperatingMode === this.selectedOperatingMode) {
+//           this.$store.dispatch('serverBootSettings/getOperatingModeSettings');
+//         } else {
+//           this.$store.commit(
+//             'serverBootSettings/setAutomaticRetryConfigValue',
+//             'RetryAttempts'
+//           );
+//           this.$store.commit(
+//             'serverBootSettings/setStopBootOnFaultValue',
+//             'Never'
+//           );
+//           this.$store.commit(
+//             'serverBootSettings/setPowerRestorePolicyValue',
+//             'LastState'
+//           );
+//         }
+//       } else if (this.selectedOperatingMode === this.manualMode) {
+//         this.$store.commit(
+//           'serverBootSettings/setAutomaticRetryConfigValue',
+//           'Disabled'
+//         );
+//         this.$store.commit(
+//           'serverBootSettings/setStopBootOnFaultValue',
+//           'Never'
+//         );
+//         this.$store.commit(
+//           'serverBootSettings/setPowerRestorePolicyValue',
+//           'AlwaysOff'
+//         );
+//       }
+//     },
+//     changeLinuxKvmPercentageValue(value) {
+//       let valueAsString = value.toString();
+//       let regex = /^\d+(\.\d?)?$/;
+//       if (regex.test(valueAsString)) {
+//         this.isLinuxKvmValid = true;
+//       } else {
+//         this.isLinuxKvmValid = false;
+//       }
+//       this.$store.dispatch(
+//         'serverBootSettings/saveLinuxPercentageValue',
+//         value
+//       );
+//     },
+//     changeTaggedSettingsValue(key, value) {
+//       this.$store.dispatch('serverBootSettings/saveTaggedSettingsValue', {
+//         key,
+//         value,
+//       });
+//     },
+//     validateLinuxKvmPercentage($event) {
+//       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
+//       let percentageValue = $event.target.value + $event.key;
+//       let decimalSet = $event.key === '.';
+//       if (!decimalSet) {
+//         // only allow number and one decimal
+//         if (
+//           (keyCode < 48 || keyCode > 57) &&
+//           (keyCode !== 46 || percentageValue.indexOf('.') != -1)
+//         ) {
+//           // 46 is decimal
+//           $event.preventDefault();
+//         }
+//       }
+//     },
+//     validateAttributeKeys(defaultPartitionEnvironment, key) {
+//       if (key === 'pvm_rpa_boot_mode') {
+//         return (
+//           defaultPartitionEnvironment === 'Default' ||
+//           defaultPartitionEnvironment === 'AIX' ||
+//           defaultPartitionEnvironment === 'Linux'
+//         );
+//       } else if (key === 'pvm_os_boot_type') {
+//         return !(
+//           defaultPartitionEnvironment === 'AIX' ||
+//           defaultPartitionEnvironment === 'Linux' ||
+//           defaultPartitionEnvironment === 'Linux KVM'
+//         );
+//       } else if (key === 'pvm_linux_kvm_memory') {
+//         return defaultPartitionEnvironment === 'Linux KVM';
+//       } else {
+//         return true;
+//       }
+//     },
+//   },
+// };
 </script>
 <style lang="scss">
 .error-text {

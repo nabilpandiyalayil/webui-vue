@@ -6,6 +6,9 @@ import { useCookies } from 'vue3-cookies';
 import Cookies from 'js-cookie';
 const { cookies } = useCookies();
 // const router = useRouter();
+
+console.log(cookies.get('XSRF-TOKEN'));
+
 export const AuthenticationStore = defineStore('authentication', {
   state: () => ({
     consoleWindow: null,
@@ -25,8 +28,10 @@ export const AuthenticationStore = defineStore('authentication', {
   },
   actions: {
     authSuccess() {
+      console.log('xkd');
       this.authError = false;
       this.xsrfCookie = Cookies.get('XSRF-TOKEN');
+      console.log(Cookies.get('XSRF-TOKEN'));
     },
     setauthError(authError = true) {
       this.authError = authError;
@@ -51,7 +56,7 @@ export const AuthenticationStore = defineStore('authentication', {
         .then((response) => {
           this.authSuccess();
           this.$state.authError = false;
-          this.xsrfCookie = response.data.token;
+          // this.xsrfCookie = response.data.token;
         })
         .catch((error) => {
           this.$state.authError = true;
@@ -82,7 +87,6 @@ export const AuthenticationStore = defineStore('authentication', {
           console.log(error);
           this.logoutRemove();
         });
-        
     },
     getUserInfo(username) {
       return api
@@ -101,9 +105,9 @@ export const AuthenticationStore = defineStore('authentication', {
         .catch((error) => console.log(error));
     },
     resetStoreState() {
-      this.$state.authError = false;
-      this.$state.xsrfCookie = cookies.get('XSRF-TOKEN');
-      this.$state.isAuthenticatedCookie = cookies.get('IsAuthenticated');
+      this.authError = false;
+      this.xsrfCookie = cookies.get('XSRF-TOKEN');
+      this.isAuthenticatedCookie = cookies.get('IsAuthenticated');
     },
   },
 });
