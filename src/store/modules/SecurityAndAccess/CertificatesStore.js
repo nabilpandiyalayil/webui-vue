@@ -158,7 +158,7 @@ export const CertificatesStore = defineStore('certificates', {
       };
       return await api
         .patch(getCertificateProp(type, 'location'), fileObj, {
-          headers: { 'Content-Type': 'application/octet-stream' },
+          headers: { 'Content-Type': 'application/json' },
         })
         .then(() => {
           this.getAcfCertificate();
@@ -189,7 +189,7 @@ export const CertificatesStore = defineStore('certificates', {
       };
       return await api
         .patch(getCertificateProp(type, 'location'), fileObj, {
-          headers: { 'Content-Type': 'application/octet-stream' },
+          headers: { 'Content-Type': 'application/json' },
         })
         .then(() =>
           i18n.global.t('pageCertificates.toast.successAddCertificate', {
@@ -247,7 +247,7 @@ export const CertificatesStore = defineStore('certificates', {
       };
       return await api
         .patch(location, fileObj, {
-          headers: { 'Content-Type': 'application/octet-stream' },
+          headers: { 'Content-Type': 'application/json' },
         })
         .then(() => {
           this.getAcfCertificate();
